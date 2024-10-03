@@ -188,7 +188,6 @@ SIMPLE_JWT = {
 import os
 from logging.handlers import RotatingFileHandler
 
-# Ensure the logs directory exists
 LOGS_DIR = os.path.join(BASE_DIR, 'logs')
 os.makedirs(LOGS_DIR, exist_ok=True)
 
