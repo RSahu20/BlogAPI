@@ -166,7 +166,7 @@ SIMPLE_JWT = {
 # Configure django to redirect users to the right URL for login
 # LOGIN_URL = "django_auth_adfs:login"
 # LOGIN_REDIRECT_URL = "/"
-
+#add
 
 
 
