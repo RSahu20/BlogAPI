@@ -1,0 +1,96 @@
+# from rest_framework.test import APITestCase, APIClient
+# from django.urls import reverse
+# from django.contrib.auth.models import User
+# from rest_framework import status
+# from blog_api.models import Category, Tag, Post, Comment
+
+# class BlogAPITests(APITestCase):
+
+#     def setUp(self):
+#         self.client = APIClient()
+#         self.user = User.objects.create_user(username='testuser', password='12345')
+#         self.client.force_authenticate(user=self.user)
+
+#         self.category = Category.objects.create(name='Test Category')
+#         self.tag = Tag.objects.create(name='Test Tag')
+
+#         self.post = Post.objects.create(
+#             title='Test Post',
+#             content='This is a test post content.',
+#             category=self.category,
+#         )
+#         self.post.tags.add(self.tag)
+
+#         self.comment = Comment.objects.create(
+#             post=self.post,
+#             author=self.user,
+#             content='This is a test comment.'
+#         )
+
+#     def test_create_post(self):
+#         url = reverse('post-list')  # Adjust this to your actual URL name
+#         data = {
+#             'title': 'New Post',
+#             'content': 'New post content',
+#             'category': self.category.id,
+#             'tags': [self.tag.id]
+#         }
+#         response = self.client.post(url, data, format='json')
+#         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+#         self.assertEqual(response.data['title'], 'New Post')
+
+#     def test_get_post(self):
+#         url = reverse('post-detail', kwargs={'pk': self.post.id})  # Adjust this to your actual URL name
+#         response = self.client.get(url, format='json')
+#         self.assertEqual(response.status_code, status.HTTP_200_OK)
+#         self.assertEqual(response.data['title'], 'Test Post')
+
+#     def test_update_post(self):
+#         url = reverse('post-detail', kwargs={'pk': self.post.id})  # Adjust this to your actual URL name
+#         data = {
+#             'title': 'Updated Post',
+#             'content': 'Updated post content',
+#             'category': self.category.id,
+#             'tags': [self.tag.id]
+#         }
+#         response = self.client.put(url, data, format='json')
+#         self.assertEqual(response.status_code, status.HTTP_200_OK)
+#         self.assertEqual(response.data['title'], 'Updated Post')
+
+#     def test_delete_post(self):
+#         url = reverse('post-detail', kwargs={'pk': self.post.id})  # Adjust this to your actual URL name
+#         response = self.client.delete(url, format='json')
+#         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+#     def test_create_comment(self):
+#         url = reverse('comment-list')  # Adjust this to your actual URL name
+#         data = {
+#             'post': self.post.id,
+#             'author': self.user.id,
+#             'content': 'New comment content'
+#         }
+#         response = self.client.post(url, data, format='json')
+#         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+#         self.assertEqual(response.data['content'], 'New comment content')
+
+#     def test_get_comment(self):
+#         url = reverse('comment-detail', kwargs={'pk': self.comment.id})  # Adjust this to your actual URL name
+#         response = self.client.get(url, format='json')
+#         self.assertEqual(response.status_code, status.HTTP_200_OK)
+#         self.assertEqual(response.data['content'], 'This is a test comment.')
+
+#     def test_update_comment(self):
+#         url = reverse('comment-detail', kwargs={'pk': self.comment.id})  # Adjust this to your actual URL name
+#         data = {
+#             'post': self.post.id,
+#             'author': self.user.id,
+#             'content': 'Updated comment content'
+#         }
+#         response = self.client.put(url, data, format='json')
+#         self.assertEqual(response.status_code, status.HTTP_200_OK)
+#         self.assertEqual(response.data['content'], 'Updated comment content')
+
+#     def test_delete_comment(self):
+#         url = reverse('comment-detail', kwargs={'pk': self.comment.id})  # Adjust this to your actual URL name
+#         response = self.client.delete(url, format='json')
+#         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
